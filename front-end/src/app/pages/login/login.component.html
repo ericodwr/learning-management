@@ -1,0 +1,63 @@
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg bg-warning">
+  <div class="container-fluid">
+    <div>
+      <a class="navbar-brand">Learning Management System</a>
+    </div>
+  </div>
+</nav>
+<!-- Navbar -->
+
+<div
+  class="d-flex justify-content-center vh-100 align-items-center flex-column container"
+>
+  <h3>Login Learning Management System</h3>
+  <form [formGroup]="loginReqDto">
+    <!-- email -->
+    <div class="my-3 row align-items-center gy-2">
+      <div class="col-12">
+        <label for="email-address" class="form-label">Email address</label>
+      </div>
+      <div class="col-12">
+        <input
+          type="email"
+          class="form-control col-12"
+          id="email-address"
+          placeholder="name@example.com"
+          formControlName="username"
+        />
+      </div>
+
+      <!-- password -->
+      <div class="col-12">
+        <label for="password" class="form-label">Password</label>
+      </div>
+      <div class="col-12">
+        <input
+          type="password"
+          class="form-control col-12"
+          id="password"
+          placeholder="password"
+          formControlName="password"
+        />
+      </div>
+      <div class="col-12">
+        <app-button
+          type="submit"
+          classBtn="btn-primary"
+          (click)="onLogin()"
+          label="Login"
+          [loading]="loading"
+        >
+        </app-button>
+      </div>
+    </div>
+  </form>
+  <app-button
+    type="button"
+    routerLink="/create-student"
+    classBtn="btn-secondary"
+    label="Create Student Account"
+  >
+  </app-button>
+</div>

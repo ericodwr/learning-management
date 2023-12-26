@@ -1,0 +1,59 @@
+<pre>
+  {{ commentInsertReq.value | json }}
+</pre>
+
+<div class="container mt-4">
+  <h3>Forum</h3>
+
+  <div style="height: 70vh" class="border border-3 overflow-scroll p-4 my-4">
+    <!-- comments -->
+    <div *ngFor="let c of commentList; let i = index">
+      <div
+        *ngIf="!checkedComment(i)"
+        class="d-flex flex-column align-items-start"
+      >
+        <span>{{ c.fullName }}</span>
+        <p class="bg-secondary text-light rounded-5 rounded-start-0 p-2">
+          {{ c.forumChat }}
+        </p>
+        <span style="margin-top: -14px">{{ c.createdAt }}</span>
+      </div>
+      <div *ngIf="checkedComment(i)" class="d-flex flex-column align-items-end">
+        <span>{{ c.fullName }}</span>
+        <p class="bg-secondary text-light rounded-5 rounded-end-0 p-2">
+          {{ c.forumChat }}
+        </p>
+        <span style="margin-top: -14px">{{ c.createdAt }}</span>
+      </div>
+    </div>
+  </div>
+
+  <form [formGroup]="commentInsertReq" (ngSubmit)="onSubmit()">
+    <div class="mb-3 row align-items-center container gy-2">
+      <div class="col-12">
+        <label for="comment" class="form-label">Add Comment</label>
+      </div>
+      <div class="col-12">
+        <textarea
+          class="form-control"
+          placeholder="Input new comment here"
+          id="comment"
+          style="height: 50px"
+          formControlName="forumChat"
+        ></textarea>
+      </div>
+      <div class="col-12 mt-2">
+        <button type="submit" class="btn btn-primary">Add Comment</button>
+      </div>
+      <div class="col-12">
+        <button
+          type="button"
+          routerLink="/learning/{{ classId }}"
+          class="btn btn-secondary"
+        >
+          Back
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

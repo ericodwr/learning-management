@@ -1,0 +1,109 @@
+<pre>
+  {{ materialInsertReqDto.value | json }}
+</pre>
+
+<div
+  class="d-flex justify-content-center align-items-center flex-column mt-4 container"
+>
+  <h3>Create Material</h3>
+  <button class="btn btn-primary" (click)="onAddMaterial()">
+    Add Material
+  </button>
+  <form [formGroup]="materialInsertReqDto" (ngSubmit)="onSubmit()">
+    <!-- Create Material -->
+    <div
+      *ngFor="let m of data.controls; let i = index"
+      formArrayName="data"
+      class="border border-3 pb-4"
+    >
+      <div
+        class="my-3 row align-items-center gy-md-4 container gy-2"
+        [formGroupName]="i"
+      >
+        <div class="col-12 col-md-3">
+          <label for="name" class="form-label"
+            >Name<span class="text-danger">*</span></label
+          >
+        </div>
+        <div class="col-12 col-md-9">
+          <input
+            type="text"
+            class="form-control col-12"
+            id="name"
+            placeholder="Material Name"
+            required
+            formControlName="materialName"
+          />
+        </div>
+        <div class="col-12 col-md-3">
+          <label for="title" class="form-label"
+            >Title<span class="text-danger">*</span></label
+          >
+        </div>
+        <div class="col-12 col-md-9">
+          <input
+            type="text"
+            class="form-control col-12"
+            id="title"
+            placeholder="Material Title"
+            required
+            formControlName="materialTitle"
+          />
+        </div>
+
+        <div class="col-12 col-md-3">
+          <label for="text" class="form-label"
+            >Text<span class="text-danger">*</span></label
+          >
+        </div>
+        <div class="col-12 col-md-9">
+          <textarea
+            class="form-control"
+            placeholder="Input material text here"
+            id="text"
+            style="height: 100px"
+            formControlName="materialText"
+          ></textarea>
+        </div>
+
+        <!-- Material Files -->
+        <div class="col-6 col-md-3">
+          <label for="option" class="form-label">Files</label>
+        </div>
+
+        <div class="col-12 col-md-4">
+          <input
+            type="file"
+            multiple
+            class="form-control col-12"
+            id="option"
+            (change)="fileUpload($event, i)"
+            placeholder="Option Name"
+          />
+        </div>
+
+        <div class="col-12">
+          <button
+            type="button"
+            class="btn btn-danger"
+            (click)="onMaterialRemove(i)"
+          >
+            Delete Material
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="col-12">
+      <button type="submit" class="btn btn-primary">Create Material</button>
+    </div>
+    <div class="col-12">
+      <button
+        type="button"
+        routerLink="/learning/{{ classId }}"
+        class="btn btn-secondary"
+      >
+        Back
+      </button>
+    </div>
+  </form>
+</div>

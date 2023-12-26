@@ -1,0 +1,15 @@
+<div class="container mt-4 border py-3">
+  <h3 class="fw-bold">{{ material?.materialName }}</h3>
+  <h5 class="fw-semibold">{{ material?.materialTitle }}</h5>
+  <p>
+    {{ material?.materialText }}
+  </p>
+  <div class="my-3">
+    <div *ngFor="let f of material?.materialFilesId; let i = index">
+      <a [href]="f | url" download>{{ i + 1 }} Download Material PDF </a>
+    </div>
+  </div>
+  <button routerLink="/learning/{{ classId }}" class="btn btn-secondary">
+    Back
+  </button>
+</div>

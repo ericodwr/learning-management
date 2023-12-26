@@ -1,0 +1,25 @@
+<div class="container mt-4">
+  <h3>Class List</h3>
+  <button
+    *ngIf="isAdmin"
+    routerLink="/class/create"
+    class="btn btn-primary mb-5"
+  >
+    Create Class
+  </button>
+  <div class="row justify-content-center gap-4">
+    <div class="card" style="width: 18rem" *ngFor="let c of classes">
+      <img [src]="c.photoId | url" class="card-img-top" alt="cardclass" />
+      <div class="card-body">
+        <h5 class="card-title">{{ c.className }}</h5>
+        <p class="card-text">Teacher: {{ c.teacherName }}</p>
+        <button class="btn btn-primary" routerLink="/learning/{{ c.id }}">
+          Go to Learning List
+        </button>
+      </div>
+    </div>
+    <div *ngIf="checkClass">
+      <h1>Class is Empty</h1>
+    </div>
+  </div>
+</div>

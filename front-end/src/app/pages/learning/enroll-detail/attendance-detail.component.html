@@ -1,0 +1,103 @@
+<div class="table-responsive container mt-4">
+  <h3>Student Attendances</h3>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col-3">No</th>
+        <th scope="col-3">Student</th>
+        <th scope="col-3">Enroll Time</th>
+        <th scope="col-3">Approvement</th>
+        <th scope="col-3">Options</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let s of students; let i = index">
+        <th scope="row">{{ i + 1 }}</th>
+        <td>{{ s.studentName }}</td>
+        <td>{{ s.createdAt }}</td>
+        <td>{{ s.approvement ? "Attend" : "Not Approve" }}</td>
+        <td>
+          <button
+            class="btn btn-secondary"
+            data-bs-toggle="modal"
+            data-bs-target="#update"
+            (click)="studentIdClick(s.studentId)"
+          >
+            Update
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <button routerLink="/learning/{{ classId }}" class="btn btn-secondary">
+    Back to Learning
+  </button>
+</div>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="update"
+  tabindex="-1"
+  aria-labelledby="updateModal"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="updateModal">
+          Update Status Attendance Student
+        </h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="col-12 col-md-3">
+            <label for="soal3" class="form-label">Select status</label>
+          </div>
+          <div class="col-12 col-md-9 d-flex gap-3">
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="status"
+                id="active"
+                (change)="onChange(true)"
+              />
+              <label class="form-check-label" for="active"> Attend </label>
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="status"
+                id="false"
+                (change)="onChange(false)"
+              />
+              <label class="form-check-label" for="false"> Absence </label>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-bs-dismiss="modal"
+          (click)="onUpdate()"
+        >
+          Submit
+        </button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

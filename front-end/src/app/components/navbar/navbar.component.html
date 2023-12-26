@@ -1,0 +1,81 @@
+<nav class="navbar navbar-expand-lg bg-warning">
+  <div
+    class="d-flex justify-content-between align-items-start vw-100 mx-md-4 mx-1"
+  >
+    <div class="container-fluid">
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarTogglerDemo01"
+        aria-controls="navbarTogglerDemo01"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+        <a class="navbar-brand" routerLink="/dashboard"
+          >Learning Management System</a
+        >
+
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <!-- Dropdown -->
+          <li class="nav-item dropdown" *ngIf="isAdmin">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Master Data
+            </a>
+            <ul class="dropdown-menu">
+              <li>
+                <a class="dropdown-item" routerLink="/users">User</a>
+              </li>
+              <li><hr class="dropdown-divider" /></li>
+            </ul>
+          </li>
+          <!-- Dropdown -->
+
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/class">Class</a>
+          </li>
+
+          <li class="nav-item" *ngIf="isStudent">
+            <a class="nav-link" routerLink="/class/enroll">Unenroll Class</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- profile -->
+    <div class="btn-group dropstart btn-group-md">
+      <a
+        type="button"
+        data-bs-toggle="dropdown"
+        data-bs-display="static"
+        aria-expanded="false"
+      >
+        <img [src]="imgUrl" alt="profile" width="35" />
+      </a>
+      <ul class="dropdown-menu dropdown-menu-lg-end">
+        <li>
+          <a class="dropdown-item btn" routerLink="/users/profile">Profile</a>
+        </li>
+        <li>
+          <a class="dropdown-item btn" routerLink="/users/changepassword"
+            >Change Password</a
+          >
+        </li>
+        <li><hr class="dropdown-divider" /></li>
+        <li>
+          <button class="dropdown-item btn" (click)="onLogout()">Logout</button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

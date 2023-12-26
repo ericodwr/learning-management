@@ -1,0 +1,54 @@
+<div
+  class="d-flex justify-content-center align-items-center flex-column mt-4 container"
+>
+  <h3>{{ task?.taskName }}</h3>
+  <p>{{ questions?.length }} Questions</p>
+  <p>Start: {{ task?.startTime }}</p>
+  <p>End: {{ task?.endTime }}</p>
+  <form>
+    <div class="my-3 row align-items-center gy-md-4 gy-2 container">
+      <!-- Essay -->
+
+      <div
+        *ngFor="let q of questions; let i = index"
+        class="my-3 row align-items-center gy-md-4 gy-2 container"
+      >
+        <div class="col-12">
+          <label for="soal1" class="form-label"
+            >{{ i + 1 }}. {{ q.questionName }}
+            <span class="text-danger">*</span></label
+          >
+        </div>
+        <div class="col-12" *ngIf="q.questionFilesList">
+          <div *ngFor="let f of q.questionFilesList; let j = index">
+            <a [href]="f | url" download>{{ j + 1 }} Download Task PDF </a>
+          </div>
+        </div>
+
+        <div>
+          <div *ngIf="q.questionType === essay" class="col-12">
+            <textarea class="form-control" id="soal1"> </textarea>
+          </div>
+          <div *ngIf="q.questionType === files">
+            <input
+              type="file"
+              class="form-control col-12"
+              id="file5"
+              placeholder="Option Name"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          routerLink="/learning/{{ classId }}"
+        >
+          Back
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

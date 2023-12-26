@@ -1,0 +1,98 @@
+<div class="container my-4">
+  <h3>Learning List</h3>
+
+  <div class="accordion" id="accordionPanelsStayOpenExample">
+    <div class="accordion-item" *ngFor="let l of learningList; let i = index">
+      <h2 class="accordion-header">
+        <button
+          class="accordion-button collapsed"
+          type="button"
+          data-bs-toggle="collapse"
+          [attr.data-bs-target]="'#' + i"
+          aria-expanded="true"
+          [attr.aria-controls]="i"
+        >
+          {{ i + 1 + ". " + l.learningName }}
+        </button>
+      </h2>
+      <div id="{{ i }}" class="accordion-collapse collapse">
+        <div class="accordion-body">
+          <div>
+            <p>Start Time: {{ l.startTime }}</p>
+            <p>End Time: {{ l.endTime }}</p>
+          </div>
+          <div>
+            <p>Attendance</p>
+            <button
+              *ngIf="isTeacher"
+              class="btn btn-primary"
+              routerLink="/learning/{{ classId }}/attendance/{{ l.id }}"
+            >
+              Details
+            </button>
+            <button
+              (click)="studentAttend(l.id)"
+              *ngIf="isStudent"
+              class="btn btn-primary"
+            >
+              Attend
+            </button>
+          </div>
+          <div>
+            <p>Forum</p>
+            <button
+              class="btn btn-primary"
+              routerLink="/{{ classId }}/forum/learning/{{ l.id }}"
+            >
+              go to forum
+            </button>
+          </div>
+          <div class="border border-3 p-3 my-2">
+            <h3>Material</h3>
+            <div *ngFor="let p of l.materials">
+              <p
+                routerLink="/{{ classId }}/material/{{ l.id }}/detail/{{
+                  p.id
+                }}"
+              >
+                {{ p.materialName }}
+              </p>
+            </div>
+            <button
+              routerLink="/{{ classId }}/material/{{ l.id }}/create"
+              class="btn btn-primary"
+              *ngIf="isTeacher"
+            >
+              Add Material
+            </button>
+          </div>
+          <div class="border border-3 p-3">
+            <h3>Task</h3>
+            <div *ngFor="let t of l.tasks">
+              <p routerLink="/{{ classId }}/task/{{ l.id }}/details/{{ t.id }}">
+                {{ t.taskName }}
+              </p>
+            </div>
+            <button
+              class="btn btn-primary"
+              routerLink="/{{ classId }}/task/{{ l.id }}/create"
+              *ngIf="isTeacher"
+            >
+              Add Task
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <button
+      routerLink="/learning/{{ classId }}/create"
+      class="btn btn-primary mt-4"
+    >
+      Create Learning
+    </button>
+  </div>
+  <button routerLink="/class" class="btn btn-secondary mt-4">Back</button>
+</div>

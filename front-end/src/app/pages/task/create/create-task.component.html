@@ -1,0 +1,173 @@
+<pre>
+  {{ taskInsertReqDto.value | json }}
+</pre>
+
+<div
+  class="d-flex justify-content-center align-items-center flex-column mt-4 container"
+>
+  <h3>Create Task</h3>
+  <button class="btn btn-primary" (click)="onAddTask()">Add Task</button>
+  <form [formGroup]="taskInsertReqDto" (ngSubmit)="onSubmit()">
+    <!-- Create Task -->
+    <div *ngFor="let t of data.controls; let i = index" formArrayName="data">
+      <div
+        [formGroupName]="i"
+        class="my-3 row align-items-center gy-md-4 container gy-2 border border-3 pb-2"
+      >
+        <div class="col-12 col-md-3">
+          <label for="name" class="form-label"
+            >Name <span class="text-danger">*</span></label
+          >
+        </div>
+        <div class="col-12 col-md-9">
+          <input
+            type="text"
+            class="form-control col-12"
+            id="name"
+            placeholder="Task Name"
+            required
+            formControlName="taskName"
+          />
+        </div>
+        <div class="col-12 col-md-3">
+          <label for="code" class="form-label"
+            >Task Code <span class="text-danger">*</span></label
+          >
+        </div>
+        <div class="col-12 col-md-9">
+          <input
+            type="text"
+            class="form-control col-12"
+            id="code"
+            placeholder="Task Code"
+            required
+            formControlName="taskCode"
+          />
+        </div>
+
+        <div class="col-12 col-md-3">
+          <label for="start" class="form-label"
+            >Start Time <span class="text-danger">*</span></label
+          >
+        </div>
+        <div class="col-12 col-md-9">
+          <input
+            type="datetime-local"
+            class="form-control col-12"
+            id="start"
+            placeholder="Packet Code"
+            required
+            formControlName="startTime"
+          />
+        </div>
+
+        <div class="col-12 col-md-3">
+          <label for="end" class="form-label"
+            >End Time <span class="text-danger">*</span></label
+          >
+        </div>
+        <div class="col-12 col-md-9">
+          <input
+            type="datetime-local"
+            class="form-control col-12"
+            id="end"
+            placeholder="Packet Code"
+            required
+            formControlName="endTime"
+          />
+        </div>
+
+        <div class="col-6 col-md-3">
+          <label for="option" class="form-label"
+            >Questions <span class="text-danger">*</span></label
+          >
+        </div>
+        <div class="col-6 col-md-9">
+          <button
+            class="btn btn-primary"
+            type="button"
+            (click)="onAddQuestion(i)"
+          >
+            Add Question
+          </button>
+        </div>
+
+        <!-- Dynamic Questions -->
+        <div
+          *ngFor="let q of questionTask(i).controls; let j = index"
+          formArrayName="questionListReq"
+        >
+          <div [formGroupName]="j" class="border border-3 p-2">
+            <div class="col-12 col-md-3">
+              <label for="question1" class="form-label"
+                >Question Name <span class="text-danger">*</span></label
+              >
+            </div>
+            <div class="col-12 col-md-9">
+              <input
+                type="text"
+                class="form-control col-12"
+                id="question1"
+                placeholder="Input Question Name"
+                required
+                formControlName="questionName"
+              />
+            </div>
+
+            <!-- Question Type -->
+
+            <div class="col-12 col-md-3">
+              <label for="type" class="form-label"
+                >Select Question Type <span class="text-danger">*</span></label
+              >
+            </div>
+            <div class="col-12 col-md-9">
+              <select
+                class="form-select"
+                id="type"
+                aria-label="Select question type"
+                formControlName="typeId"
+              >
+                <option [value]="t.id" *ngFor="let t of questionTypes">
+                  {{ t.typeName }}
+                </option>
+              </select>
+            </div>
+            <div class="col-6 col-md-3">
+              <label for="question-file" class="form-label"
+                >Question Files <span class="text-danger">*</span></label
+              >
+            </div>
+            <div class="col-12 col-md-4 offset-md-3">
+              <input
+                type="file"
+                class="form-control col-12"
+                id="question-file"
+                placeholder="Question Files"
+                multiple
+                (change)="fileUpload($event, i, j)"
+              />
+            </div>
+
+            <div class="col-12 py-2">
+              <button class="btn btn-danger" (click)="onDeleteQuestion(i, j)">
+                Delete Question
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="col-12">
+          <button class="btn btn-danger" (click)="onDeleteTask(i)">
+            Delete Task
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="col-12">
+      <button type="submit" class="btn btn-primary">Create Task</button>
+    </div>
+    <div class="col-12">
+      <button routerLink="" class="btn btn-secondary">Back</button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,86 @@
+<pre>
+  {{ classInsertReqDto.value | json }}
+</pre>
+
+<div
+  class="d-flex justify-content-center align-items-center flex-column mt-4 container"
+>
+  <h3>Create Class</h3>
+  <form [formGroup]="classInsertReqDto" (ngSubmit)="onCreate()">
+    <div class="my-3 row align-items-center gy-md-4 container gy-2">
+      <div class="col-12 col-md-3">
+        <label for="class" class="form-label"
+          >Class<span class="text-danger">*</span></label
+        >
+      </div>
+      <div class="col-12 col-md-9">
+        <input
+          type="text"
+          class="form-control col-12"
+          id="class"
+          placeholder="Class Name"
+          required
+          formControlName="className"
+        />
+      </div>
+      <div class="col-12 col-md-3">
+        <label for="code" class="form-label"
+          >Class Code<span class="text-danger">*</span></label
+        >
+      </div>
+      <div class="col-12 col-md-9">
+        <input
+          type="text"
+          class="form-control col-12"
+          id="code"
+          placeholder="Class Code"
+          required
+          formControlName="classCode"
+        />
+      </div>
+
+      <div class="col-12 col-md-3">
+        <label for="teacher" class="form-label"
+          >Select Teacher <span class="text-danger">*</span></label
+        >
+      </div>
+      <div class="col-12 col-md-9">
+        <select
+          class="form-select"
+          id="teacher"
+          aria-label="Select question packet"
+          formControlName="teacherId"
+        >
+          <option [value]="t.id" *ngFor="let t of teachers">
+            {{ t.fullName }}
+          </option>
+        </select>
+      </div>
+
+      <div class="col-12 col-md-3">
+        <label for="teacher" class="form-label"
+          >Class Image <span class="text-danger">*</span></label
+        >
+      </div>
+      <div class="col-12 col-md-9">
+        <input
+          type="file"
+          class="form-control col-12"
+          id="code"
+          placeholder="Class Code"
+          required
+          (change)="fileUpload($event)"
+        />
+      </div>
+
+      <div class="col-12">
+        <button type="submit" class="btn btn-primary">Create Class</button>
+      </div>
+      <div class="col-12">
+        <button type="button" routerLink="/class" class="btn btn-secondary">
+          Back
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
